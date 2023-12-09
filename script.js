@@ -1,7 +1,7 @@
 
 
 //Fuction for computer to randomly choice between rock paper and scissors//
-function AIchoice(){
+ function AIchoice(){
     let x = Math.random();
     if (0 <= x && x < 1/3){
         rps = 'rock';
@@ -15,60 +15,110 @@ function AIchoice(){
     return rps
 }
 
-console.log(AIchoice())
 
-//function to take player input or Rock PAPAER scissors in any case 
+
+//function to take player input or Rock PAPER scissors in any case 
 //convert to all lowercase (or any chosen case)
 
-
-
+function plyChoice(){
+    let rpsPlayer = prompt("Rock, Paper, Scissors?").toLowerCase();
+    if (rpsPlayer === 'rock'|| rpsPlayer === 'paper'|| rpsPlayer === 'scissors'){
+        return rpsPlayer;
+    }
+    else { 
+        alert('please enter rock, paper or scissors');
+        plyChoice();
+    }
+}
 
 
 //function to output win or lose
 //AIchoice to player choice
 //9 total possible outcomes due to 3 x 3 combinations
 // all draws can be completed on same line
-let plychoice = 'rock';
-
-lose = 0;
-draw = 0;
-
-console.log(win);
-console.log(lose);
-console.log(draw);
-console.log(plychoice);
 
 
-for (let win = 0; win < 5 ){
+var rounds = 5; 
+// this will control best of 5 etc 
+// future implementation of function to request rounds from player
 
-    function winner(plychoice, AIchoice){
-        if (plychoice === 'rock' && AIchoice() === 'scissors' ||
-            plychoice === 'paper' && AIchoice() === 'rock' || 
-            plychoice === 'scissors' && AIchoice() === 'paper'){
-            win++;   
-            console.log(win);
-        }   
-        else if(plychoice === 'rock' && AIchoice() === 'paper' ||
-                plychoice === 'paper' && AIchoice() === 'scissors' ||
-                plychoice === 'scissors' && AIchoice() === 'rock'){
-            lose++;   
-            console.log(lose);
-        }
-        else if(plychoice === AIchoice()){
-            draw++; 
-            console.log(draw);
-        }
-        return { win, lose, draw
+
+// potental to keep score in an array
+
+const score = [win = 0, lose = 0, draw = 0];
+console.log(score);
+
+
+
+//function play(plychoice, AIchoice){
+   for (win = 0, lose = 0; win < 5, lose < 5;){
+
+        function winner(plychoice, AIchoice){
+            console.log('NPC '+ AIchoice);
+            console.log('PC '+ plychoice);
+            if (plychoice == 'rock' && AIchoice == 'scissors' || // and / or statements work
+                plychoice == 'paper' && AIchoice == 'rock' || 
+                plychoice == 'scissors' && AIchoice == 'paper'){
+                win++;                                          // adding 1 doesnt work
+                return {win, lose, draw};
+            }   
+            else if(plychoice == 'rock' && AIchoice == 'paper' ||
+                    plychoice == 'paper' && AIchoice == 'scissors' ||
+                    plychoice == 'scissors' && AIchoice == 'rock'){
+                lose++;   
+                return {win, lose, draw};
+            }
+            else if(plychoice == AIchoice){
+                draw++; 
+                return {win, lose, draw};
+            }
+            
+            score2 = [win, lose, draw];
+            return score2;
+            
+            
+            
         }
        
+        console.log(winner(AIchoice(), AIchoice())) // both set to AI for testing
     }
-    console.log(winner(plychoice, AIchoice))
+        
 
-console.log(win);
-console.log(lose);
-console.log(draw);
+//    }
+//   return {win, lose, draw};
+
+ 
+// }
+
+
+// switch statement
+
+/*switch (score){
+    case (5, *, *);
+        console.log()
+        break;
+}
+*/
+
+
+/* function finalWinner(){
+    if (win === rounds){
+        return 'You have won';
+    
+        //stop further loops
+        //reset
+    }
+    else if (lose === rounds){
+        return 'You have lost';
+        //stop further loops
+        // reset
+    }
+    else {}//continue
 }
 
+console.log(finalWinner(play()));
+
+*/
 
 //function to loop for 5 wins or 5 loses and then reset 
 //count wins and loses and draws
